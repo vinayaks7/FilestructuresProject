@@ -10,7 +10,7 @@ int countofindex=0;
 class details {
 public :
     char ind[10];
-    char date[8];
+    char date[10];
     char day[10];
     char mno[5];
     char mname[20];
@@ -171,9 +171,9 @@ void delet(string index){
 
 
 
-void read_details(fstream &f1) {
+void read_details() {
     cout << "Enter the details";
-    fstream f2;
+    fstream f1,f2;
     details d;
     char temp[8];
 
@@ -189,7 +189,7 @@ void read_details(fstream &f1) {
     cin >> d.fname;
     cout << "\ncalo:";
     cin >> d.calo;
-    char makingindex[10];
+    char makingindex[12];
     for (int i = 0; i < 8; i++) {
         makingindex[i] = d.date[i];
     }
@@ -198,15 +198,15 @@ void read_details(fstream &f1) {
     for (int i = 0; i < 10; i++) {
         d.ind[i] = makingindex[i];
     }
+    f1.open("recordsfornutrition1.txt",ios::in|ios::app);
 
-
-    f1 << d.ind << "|" << d.date << "|" << d.day << "|" << d.mno << "|" << d.mname << "|" << d.fname << "|" << d.calo
+    f1 << makingindex << "|" << d.date << "|" << d.day << "|" << d.mno << "|" << d.mname << "|" << d.fname << "|" << d.calo
        << "\n";
 
     f1.close();
 
     f2.open("indexfornutrition1.txt", ios::in | ios::app);
-    f2 << countofindex << "|" << d.ind << "\n";
+    f2 << countofindex++ << "|" << makingindex << "\n";
     f2.close();
 }
 
@@ -241,7 +241,7 @@ void report(string date){
 }
 
 
-void search(char date[]){
+void search(string date){
     fstream  f2;
     char ind[100];char indexofnutrition[100];
     f2.open("indexfornutrition1.txt", ios::in);
@@ -254,8 +254,8 @@ void search(char date[]){
             f2.getline(ind, 50, '|');
             f2.getline(indexofnutrition, 50, '\n');
 //            cout<<indexofnutrition<<" "<<ind<<endl;
-            if(((string)indexofnutrition).substr(0,8)==(string)date){
-               report((string)date);
+            if(((string)indexofnutrition).substr(0,8)==date){
+               report(date);
                 break;
             }
             else{
@@ -296,17 +296,56 @@ int main() {
 
     fstream f1,f2;
 
-//    f1.open("recordsfornutrition1.txt",ios::in|ios::app);
-//    read_details(f1);
+
+//    for(;;){
+
+
+        cout<<"Enter your choice"<<endl;
+
+        int choice;
+
+        cout<<"1.Enter a new meal value"<<endl;
+        cout<<"2.Display the report"<<endl;
+        cout<<"3.Delete the report"<<endl;
+        cout<<"4.Update the report"<<endl;
+        cin>>choice;
+
+        switch(choice){
+
+            case 1:{
+
+
+                    read_details();
+                break;}
+
+            case 2:{
+                string date;
+                cout<<"Enter the date"<<endl;
+                cin>>date;
+                search(date);
+                break;
+            }
+
+
+            case 3:break;
+            case 4:break;
+            default:break;
+
+
+        }
+
+    //    }
+
+
 //    cout << "USN\t NAME\t AGE\t SEM\t BRANCH\n";
-    char dind[100];
-    char ddate[80];
-    char dday[100];
-    char dmno[50];
-    char dmname[200];
-    char dfname[200];
-    char dcalo[50];
-//    while (!f1.eof())
+//    char dind[100];
+//    char ddate[80];
+//    char dday[100];
+//    char dmno[50];
+//    char dmname[200];
+//    char dfname[200];
+//    char dcalo[50];
+////    while (!f1.eof())
 //    {
 //    f1.open("recordsfornutrition1.txt",ios::in|ios::app);
 //
@@ -338,11 +377,11 @@ int main() {
 //    }
 //    search(srcdate);
 
-cout<<"Enter index"<<endl;
-string index;
-cin>>index;
-
-    delet(index);
+//cout<<"Enter index"<<endl;
+//string index;
+//cin>>index;
+//
+//    delet(index);
 
     return 0;
 }
