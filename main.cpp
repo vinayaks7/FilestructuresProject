@@ -22,39 +22,37 @@ public :
 
 bool searchfordelte(string index){
 
-//    fstream f2;
-//    char sdind[100];
-//    char sddate[80];
-//    char sdday[100];
-//    char sdmno[50];
-//    char sdmname[200];
-//    char sdfname[200];
-//    char sdcalo[50];
-//    f2.open("indexfornutrition1.txt", ios::in);
-//
-//    if(f2.is_open()){
-//
-//        while(!f2.eof()){
-//            f2.getline(sdind, 50, '|');
-//            f2.getline(sddate, 50, '|');
-//            f2.getline(sdday, 50, '|');
-//            f2.getline(sdmno, 20, '|');
-//            f2.getline(sdmname, 50, '|');
-//            f2.getline(sdfname, 60, '|');
-//            f2.getline(sdcalo, 30, '\n');
-//            if ((string) sdind != index) {
-//                return true;
-//            }
-//        }
-//        f2.close();
-//        return false;
-//
-//    }
-//    else{
-//        cout<<"File didnt open inside searchfordelete"<<endl;
-//        return false;
-//    }
-return true;
+    fstream f2;
+    char sdind[100];
+    char sddate[80];
+    char sdday[100];
+    char sdmno[50];
+    char sdmname[200];
+    char sdfname[200];
+    char sdcalo[50];
+    f2.open("recordsfornutrition1.txt", ios::in);
+
+    if(f2.is_open()){
+        while(!f2.eof()){
+            f2.getline(sdind, 50, '|');
+            f2.getline(sddate, 50, '|');
+            f2.getline(sdday, 50, '|');
+            f2.getline(sdmno, 20, '|');
+            f2.getline(sdmname, 50, '|');
+            f2.getline(sdfname, 60, '|');
+            f2.getline(sdcalo, 30, '\n');
+            if ((string) sdind == index) {
+                return true;
+            }
+        }
+        f2.close();
+        return false;
+    }
+    else{
+        cout<<"File didnt open inside searchfordelete"<<endl;
+        return false;
+    }
+
 }
 
 
@@ -106,76 +104,68 @@ void dothesamethingforindex(string index){
 void delet(string index){
 
     bool ans= searchfordelte(index);
-//    if(ans)
-//    {
-//        fstream  f1,f3;
-//        char dind[100];
-//        char ddate[80];
-//        char dday[100];
-//        char dmno[50];
-//        char dmname[200];
-//        char dfname[200];
-//        char dcalo[5];
-//        f1.open("recordsfornutrition1.txt",ios::in);
-//        f3.open("filefordeletion.txt",ios::out);
-//
-//
-//        if(f1.is_open() and f3.is_open()) {
-//
-//            while (!f1.eof()) {
-//                f1.getline(dind, 50, '|');
-//                f1.getline(ddate, 50, '|');
-//                f1.getline(dday, 50, '|');
-//                f1.getline(dmno, 20, '|');
-//                f1.getline(dmname, 50, '|');
-//                f1.getline(dfname, 60, '|');
-//                f1.getline(dcalo,50,'\n');
-//                if ((string) dind != index) {
-//                    f3 << dind <<'|' << ddate << '|' << dday << '|' << dmno << '|' << dmname <<'|' << dfname << '|' << dcalo
-//                       << "\n";
-//                }
-//
-//                cout<<"reached10111111111"<<endl;
-//            }
-//            cout<<"reached10"<<endl;
-//            f1.close();
-//            f3.close();
-//
-//        }
-//
-//        else{
-//          cout<<"Nothing:"<<endl;
-//            return;
-//        }
-//
-//            f1.open("recordsfornutrition1.txt",ios::out|ios::trunc);
-//            f3.open("filefordeletion.txt",ios::in);
-//            if(f1.is_open() and f3.is_open()){
-//                string str;
-//                while (getline(f3, str))
-//                {
-//                    f1 << str ;
-//                }
-//                f1.close();
-//                f3.close();
-//            }
-//            else{
-//                cout<<"Not opening"<<endl;
-//                return;
-//            }
-//
-//
-//    }
-//    else
-//    {
-//        cout<<"Entry not found"<<endl;
-//        return;
-//    }
+//    cout<<"ans:"<<ans<<endl;
+    if(ans)
+    {
+        fstream  f1,f3;
+        char dind[100];
+        char ddate[80];
+        char dday[100];
+        char dmno[50];
+        char dmname[200];
+        char dfname[200];
+        char dcalo[5];
+        f1.open("recordsfornutrition1.txt",ios::in);
+        f3.open("filefordeletion.txt",ios::out);
 
 
+        if(f1.is_open() and f3.is_open()) {
+
+            while (!f1.eof()) {
+                f1.getline(dind, 50, '|');
+                f1.getline(ddate, 50, '|');
+                f1.getline(dday, 50, '|');
+                f1.getline(dmno, 20, '|');
+                f1.getline(dmname, 50, '|');
+                f1.getline(dfname, 60, '|');
+                f1.getline(dcalo,50,'\n');
+                if ((string) dind != index) {
+                    f3 << dind <<'|' << ddate << '|' << dday << '|' << dmno << '|' << dmname <<'|' << dfname << '|' << dcalo
+                       << "\n";
+                }
+
+                cout<<"reached10111111111"<<endl;
+            }
+            cout<<"reached10"<<endl;
+            f1.close();
+            f3.close();
+        }
+        else{
+          cout<<"Nothing:"<<endl;
+            return;
+        }
+            f1.open("recordsfornutrition1.txt",ios::out|ios::trunc);
+            f3.open("filefordeletion.txt",ios::in);
+            if(f1.is_open() and f3.is_open()){
+                string str;
+                while (getline(f3, str))
+                {
+                    f1 << str ;
+                }
+                f1.close();
+                f3.close();
+            }
+            else{
+                cout<<"Not opening"<<endl;
+                return;
+            }
+    }
+    else
+    {
+        cout<<"Entry not found"<<endl;
+        return;
+    }
     dothesamethingforindex(index);
-
-
 }
 
 
