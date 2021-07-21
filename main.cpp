@@ -23,14 +23,15 @@ public :
 bool searchfordelte(string index){
 
     fstream f2;
-    char sdind[100];
-    char sddate[80];
-    char sdday[100];
-    char sdmno[50];
-    char sdmname[200];
-    char sdfname[200];
+    char sdind[15];
+    char sddate[15];
+    char sdday[20];
+    char sdmno[15];
+    char sdmname[20];
+    char sdfname[20];
     char sdcalo[50];
     f2.open("recordsfornutrition1.txt", ios::in);
+    cout<<"1"<<endl;
 
     if(f2.is_open()){
         while(!f2.eof()){
@@ -40,11 +41,12 @@ bool searchfordelte(string index){
             f2.getline(sdmno, 20, '|');
             f2.getline(sdmname, 50, '|');
             f2.getline(sdfname, 60, '|');
-            f2.getline(sdcalo, 30, '\n');
+            f2.getline(sdcalo, 50, '\n');
             if ((string) sdind == index) {
                 return true;
             }
         }
+        cout<<"2"<<endl;
         f2.close();
         return false;
     }
@@ -62,16 +64,18 @@ void dothesamethingforindex(string index){
     char ind[50];
     char indexstring[50];
     f2.open("indexfornutrition1.txt", ios::in);
-    f4.open("deletionforindex1.txt",ios::out|ios::trunc);
+    f4.open("deletionforindex1.txt",ios::out);
     cout<<"reaching here 1"<<endl;
 
     if(f2.is_open() and f4.is_open()){
         cout<<"reaching here 2"<<endl;
         while(!f2.eof()){
-            f2.getline(ind, 50, '|');
+            f2.getline(ind, 15, '|');
             f2.getline(indexstring, 15, '\n');
             if((string)indexstring!=index){
-                f4<<ind<<"|"<<indexstring<<"\n";
+                if((string)indexstring!="") {
+                    f4 << ind << "|" << indexstring << "\n";
+                }
             }
         }
         f2.close();
@@ -104,16 +108,16 @@ void dothesamethingforindex(string index){
 void delet(string index){
 
     bool ans= searchfordelte(index);
-//    cout<<"ans:"<<ans<<endl;
+    cout<<"ans:"<<ans<<endl;
     if(ans)
     {
         fstream  f1,f3;
-        char dind[100];
-        char ddate[80];
-        char dday[100];
+        char dind[50];
+        char ddate[50];
+        char dday[50];
         char dmno[50];
-        char dmname[200];
-        char dfname[200];
+        char dmname[100];
+        char dfname[100];
         char dcalo[5];
         f1.open("recordsfornutrition1.txt",ios::in);
         f3.open("filefordeletion.txt",ios::out);
@@ -122,18 +126,21 @@ void delet(string index){
         if(f1.is_open() and f3.is_open()) {
 
             while (!f1.eof()) {
-                f1.getline(dind, 50, '|');
-                f1.getline(ddate, 50, '|');
-                f1.getline(dday, 50, '|');
-                f1.getline(dmno, 20, '|');
-                f1.getline(dmname, 50, '|');
-                f1.getline(dfname, 60, '|');
-                f1.getline(dcalo,50,'\n');
+                f1.getline(dind, 20, '|');
+                f1.getline(ddate, 20, '|');
+                f1.getline(dday, 20, '|');
+                f1.getline(dmno, 10, '|');
+                f1.getline(dmname, 30, '|');
+                f1.getline(dfname, 30, '|');
+                f1.getline(dcalo,5,'\n');
                 if ((string) dind != index) {
-                    f3 << dind <<'|' << ddate << '|' << dday << '|' << dmno << '|' << dmname <<'|' << dfname << '|' << dcalo
-                       << "\n";
-                }
+                    if((string) dind!=""){
+                        f3 << dind <<"|" << ddate << "|" << dday << "|" << dmno << "|" << dmname <<"|" << dfname << "|" << dcalo
+                           << "\n";
 
+                    }
+
+                }
                 cout<<"reached10111111111"<<endl;
             }
             cout<<"reached10"<<endl;
@@ -150,7 +157,7 @@ void delet(string index){
                 string str;
                 while (getline(f3, str))
                 {
-                    f1 << str ;
+                    f1 << str<<"\n" ;
                 }
                 f1.close();
                 f3.close();
