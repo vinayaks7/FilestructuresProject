@@ -159,6 +159,8 @@ void delet(string index){
                 cout<<"Not opening"<<endl;
                 return;
             }
+
+            cout<<"Deletion successfull"<<endl;
     }
     else
     {
@@ -242,12 +244,12 @@ void report(string date){
 
 
 void search(string date){
-    fstream  f2;
+    fstream  f2;bool flag=true;
     char ind[100];char indexofnutrition[100];
     f2.open("indexfornutrition1.txt", ios::in);
       if(f2.is_open())
       {
-        cout<<"Reaching here"<<endl;
+//        cout<<"Reaching here"<<endl;
         while(!f2.eof())
         {
 //            cout<<"Reaching here1"<<endl;
@@ -259,8 +261,11 @@ void search(string date){
                 break;
             }
             else{
-                cout<<"Not presest"<<endl;
+                flag=false;
             }
+        }
+        if(!flag){
+            cout<<"Not presesnt"<<endl;
         }
         f2.close();
     }
@@ -327,8 +332,23 @@ int main() {
             }
 
 
-            case 3:break;
-            case 4:break;
+            case 3:{
+            cout<<"Enter index"<<endl;
+            string index;
+            cin>>index;
+            delet(index);
+            break;
+
+            }
+
+            case 4:{
+                cout<<"Enter index"<<endl;
+                string index;
+                cin>>index;
+                delet(index);
+                read_details();
+                break;
+            }
             case 5:{
                 exit(0);
                 break;
