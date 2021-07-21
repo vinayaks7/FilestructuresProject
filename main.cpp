@@ -297,7 +297,7 @@ int main() {
     fstream f1,f2;
 
 
-//    for(;;){
+    for(;;){
 
 
         cout<<"Enter your choice"<<endl;
@@ -308,17 +308,17 @@ int main() {
         cout<<"2.Display the report"<<endl;
         cout<<"3.Delete the report"<<endl;
         cout<<"4.Update the report"<<endl;
+        cout<<"5.Exit"<<endl;
         cin>>choice;
 
         switch(choice){
 
             case 1:{
-
-
                     read_details();
-                break;}
-
-            case 2:{
+                break;
+            }
+            case 2:
+            {
                 string date;
                 cout<<"Enter the date"<<endl;
                 cin>>date;
@@ -329,12 +329,19 @@ int main() {
 
             case 3:break;
             case 4:break;
+            case 5:{
+                exit(0);
+                break;
+
+            }
+
+
             default:break;
 
 
         }
 
-    //    }
+        }
 
 
 //    cout << "USN\t NAME\t AGE\t SEM\t BRANCH\n";
