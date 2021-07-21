@@ -141,9 +141,9 @@ void delet(string index){
                     }
 
                 }
-                cout<<"reached10111111111"<<endl;
+
             }
-            cout<<"reached10"<<endl;
+
             f1.close();
             f3.close();
         }
@@ -366,6 +366,7 @@ int main() {
                 string index;
                 cin>>index;
                 delet(index);
+
                 read_details();
                 break;
             }
