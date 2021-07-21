@@ -281,28 +281,47 @@ void search(string date){
     }
 }
 
+
+void counttotal(string date){
+
+    fstream f1;
+    char ctind[100];
+    char ctdate[80];
+    char ctday[100];
+    char ctmno[50];
+    char ctmname[200];
+    char ctfname[200];
+    char ctcalo[50];
+    int total=0;
+    f1.open("recordsfornutrition1.txt",ios::in);
+    if(f1.is_open()){
+        while(!f1.eof()){
+
+            f1.getline(ctind, 50, '|');
+            f1.getline(ctdate, 50, '|');
+            f1.getline(ctday, 50, '|');
+            f1.getline(ctmno, 20, '|');
+            f1.getline(ctmname, 50, '|');
+            f1.getline(ctfname, 60, '|');
+            f1.getline(ctcalo, 30, '\n');
+            if(date==(string)ctdate){
+                string c=(string)ctcalo;
+                int sub= stoi(c);
+                total=total+sub;
+            }
+        }
+        f1.close();
+        cout<<"The number of calories consumed on "<<date<<" is "<<total<<endl;
+    }
+    else{
+        cout<<"Not opened\n";
+    }
+}
+
 void write(fstream &a, fstream &b) {
 
 
 }
-
-//void display(fstream &f1){
-//
-//
-//    while(!f1.eof()){
-//
-//        f1.getline(dind,10,'|');
-//        f1.getline(ddate,8,'|');
-//        f1.getline(dday,10,'|');
-//        f1.getline(dmno,5,'|');
-//        f1.getline(dmname,20,'|');
-//        f1.getline(dfname,20,'|');
-//        f1.getline(dcalo,5,'|');
-//        cout<<ddate<<"\t"<<dday<<"\t"<<dmno<<"\t"<<dmname<<"\t"<<dfname<<"\t"<<dcalo<<endl;
-//    }
-//    f1.close();
-//}
-
 
 int main() {
 
@@ -313,9 +332,7 @@ int main() {
 
 
         cout<<"Enter your choice"<<endl;
-
         int choice;
-
         cout<<"1.Enter a new meal value"<<endl;
         cout<<"2.Display the report"<<endl;
         cout<<"3.Delete the report"<<endl;
@@ -337,17 +354,13 @@ int main() {
                 search(date);
                 break;
             }
-
-
             case 3:{
             cout<<"Enter index"<<endl;
             string index;
             cin>>index;
             delet(index);
             break;
-
             }
-
             case 4:{
                 cout<<"Enter index"<<endl;
                 string index;
@@ -359,63 +372,19 @@ int main() {
             case 5:{
                 exit(0);
                 break;
-
             }
-
-
+            case 6:{
+                cout<<"Enter the date\n";
+                string date;
+                cin>>date;
+                counttotal(date);
+                break;
+            }
             default:break;
 
 
         }
 
         }
-
-
-//    cout << "USN\t NAME\t AGE\t SEM\t BRANCH\n";
-//    char dind[100];
-//    char ddate[80];
-//    char dday[100];
-//    char dmno[50];
-//    char dmname[200];
-//    char dfname[200];
-//    char dcalo[50];
-////    while (!f1.eof())
-//    {
-//    f1.open("recordsfornutrition1.txt",ios::in|ios::app);
-//
-//    if(f1.is_open()){
-//        while(f1.eof()){
-//            f1.getline(dind, 50, '|');
-//            f1.getline(ddate, 50, '|');
-//            f1.getline(dday, 50, '|');
-//            f1.getline(dmno, 20, '|');
-//            f1.getline(dmname, 50, '|');
-//            f1.getline(dfname, 60, '|');
-//            f1.getline(dcalo, 30, '\n');
-//            cout << dind << "\t" << ddate << "\t" << dday << "\t" << dmno << "\t" << dmname <<"\t"<<dcalo<<"\n";
-//        }
-
-//        cout<<"ddate->"<<ddate<<" ";
-//        f1.close();
-//    }
-//    else{
-//        cout<<"Not open"<<endl;
-//    }
-
-//    }
-
-//    cout<<"Enter the date"<<endl;
-//    char srcdate[8];
-//    for(int i=0;i<8;i++){
-//        cin>>srcdate[i];
-//    }
-//    search(srcdate);
-
-//cout<<"Enter index"<<endl;
-//string index;
-//cin>>index;
-//
-//    delet(index);
-
     return 0;
 }
